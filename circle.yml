@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 6.1.0
+
+test:
+  override:
+    - npm run test
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - npm run build
+      - aws configure set default.s3.signature_version s3v4 && aws s3 sync dist/ s3://glug.life/ --delete --region us-east-2

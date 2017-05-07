@@ -7,12 +7,9 @@
     "start": "NODE_ENV=development BABEL_ENV=development node ./server.js",
     "build": "NODE_ENV=production BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.prod.js",
     "lint": "eslint --ext .js --ext .jsx app",
+    "test": "echo \"hey\"",
     "validate": "npm ls"
   },
-  "pre-commit": [
-    "validate",
-    "lint"
-  ],
   "author": "Wade Mauger",
   "license": "MIT",
   "dependencies": {
