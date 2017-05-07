@@ -36,7 +36,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({ async: true, minChunks: 2 }),
     new webpack.optimize.MinChunkSizePlugin({ minChunkSize: 8192 }),
     new HtmlWebpackPlugin({
-      title: 'Webpack-React-Redux',
+      title: 'Glug',
       filename: '../index.html',
       template: './app/index.ejs',
     }),
