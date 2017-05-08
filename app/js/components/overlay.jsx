@@ -9,7 +9,7 @@ export default class Overlay extends Component {
   render() {
     return (
       <Modal
-        open={this.props.store.overlayShown}
+        open={true}
         onClose={this.props.store.toggleOverlay}
         basic
         size='small'
@@ -43,7 +43,7 @@ export default class Overlay extends Component {
                       {word.word} 
                     </Table.Cell>
                     <Table.Cell>
-                      {word.occurances}
+                      {word.occurrences}
                     </Table.Cell>
                   </Table.Row>
                 )
