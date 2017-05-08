@@ -4,13 +4,13 @@
     "production": {
       "plugins": [
         "transform-react-remove-prop-types",
+        "transform-decorators-legacy"
       ]
     },
     "development": {
       "plugins": [
         "react-hot-loader/babel",
         "transform-decorators-legacy"
-
       ]
     }
   }
