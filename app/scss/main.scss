@@ -1,7 +1,14 @@
 * {
   margin: 0;
   padding: 0;
-  color: white;
+  color: white!important;
+}
+
+body { 
+    background-image: url('../img/glug-banner.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
 }
 
 a.item {
@@ -23,7 +30,17 @@ a.item {
   width: 100%;
 }
 
+.item.searchItem {
+  padding-right: 40px!important;
+}
+
+.searchItem input{
+  color: black!important;
+}
+
 .headerLogo {
+  margin:auto;
+  display:block;
   margin-top: 12px !important;
 }
 
@@ -41,4 +58,27 @@ body {
 
 input {
   width: 70vw;
+}
+
+.ui.card {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
