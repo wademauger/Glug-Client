@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Overlay from './overlay';
+import Spinner from './spinner';
 import Title from './title';
 import { inject, observer } from 'mobx-react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
@@ -23,6 +24,7 @@ export default inject('store')(observer(({store}) => (
       }
     </CSSTransitionGroup>
     <Overlay />
+    <Spinner />
   </div>
 )));
 

@@ -8,6 +8,7 @@ class store {
   @observable currentQuery = '';
   @observable movieTitles = [];
   @observable overlayShown = false;
+  @observable spinnerShown = false;
 
   /*information about the current movie*/
   @observable title = '';
@@ -20,6 +21,7 @@ class store {
   @observable ref = '';
 
   getInfo = (ref, title, numSubs) => {
+    this.spinnerShown = true;
     this.ref = ref;
     this.title = title;
     this.numSubs = numSubs;
@@ -37,6 +39,7 @@ class store {
         this.description = data.overview;
         this.coverImage = data.poster;
         this.overlayShown = true;
+        this.spinnerShown = false;
       })
       .catch(err => console.log(err));
   }
