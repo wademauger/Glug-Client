@@ -8,6 +8,7 @@ class store {
   @observable currentQuery = '';
   @observable movieTitles = [];
   @observable overlayShown = false;
+  @observable errorShown = false;
   @observable spinnerShown = false;
 
   /*information about the current movie*/
@@ -20,6 +21,8 @@ class store {
   @observable imdbid = '';
   @observable ref = '';
 
+  mostRecent = Date.now();
+
   getInfo = (ref, title, numSubs) => {
     this.spinnerShown = true;
     this.ref = ref;
@@ -27,7 +30,14 @@ class store {
     this.numSubs = numSubs;
 
     getWords(ref)
-      .then(results => results.json())
+      .then(results => {
+        if (results.status != 200){
+          this.clearOverlays();
+          this.errorShown = true;
+          throw "could not get words.";
+        }
+        return results.json();
+      })
       .then(data => {
         this.runtime = data.runtime;
         this.imdbid = data.imdbid; 
@@ -46,8 +56,15 @@ class store {
 
   requestTitles = (event) => {
     this.currentQuery = event.target.value;
+    this.mostRecent = Date.now();
+    const myTime = Date.now();
     getTitles(this.currentQuery)
-      .then(results => results.json())
+      .then(results => {
+        if (myTime > this.mostRecent){
+          throw "not more recent titles request";
+        }
+        return results.json();
+      })
       .then(data => this.movieTitles.replace(data))
       .catch(err => {
         console.log(err);
@@ -56,6 +73,16 @@ class store {
 
   toggleOverlay = () => {
     this.overlayShown = !this.overlayShown;
+  }
+
+  toggleError = () => {
+    this.errorShown = !this.errorShown;
+  }
+
+  clearOverlays = () => {
+    this.errorShown = false;
+    this.spinnerShown = false;
+    this.overlayShown = false;
   }
 }
 

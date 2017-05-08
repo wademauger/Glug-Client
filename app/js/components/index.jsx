@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from './error';
 import Header from './header';
 import Overlay from './overlay';
 import Spinner from './spinner';
@@ -23,8 +24,9 @@ export default inject('store')(observer(({store}) => (
         )
       }
     </CSSTransitionGroup>
-    <Overlay />
-    <Spinner />
+    {store.errorShown ? <Error /> : null}
+    {store.overlayShown ? <Overlay /> : null}
+    {store.spinnerShown ? <Spinner /> : null} 
   </div>
 )));
 
