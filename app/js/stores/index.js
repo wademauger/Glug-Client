@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import { getTitles, getTitle, getWords, getCover } from '../api';
 import coverImage from '../../img/cover-image.png';
 import overlayState from './overlay';
+import moment from 'moment';
 
 class store {
 
@@ -13,7 +14,7 @@ class store {
 
   /*information about the current movie*/
   @observable title = '';
-  @observable runtime = 0;
+  @observable runtime = '0';
   @observable numSubs = 0;
   @observable description = '';
   @observable coverImage = '';
@@ -39,13 +40,13 @@ class store {
         return results.json();
       })
       .then(data => {
-        this.runtime = data.runtime;
         this.imdbid = data.imdbid; 
         this.drinkWords.replace(data['ranked_words']);
         return getTitle(data.imdbid)
       })
       .then(results => results.json())
       .then(data => {
+        this.runtime = moment.duration(data.runtime, 'seconds').asMinutes();
         this.description = data.overview;
         this.coverImage = data.poster;
         this.overlayShown = true;

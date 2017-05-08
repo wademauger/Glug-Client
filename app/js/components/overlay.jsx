@@ -43,7 +43,7 @@ export default class Overlay extends Component {
                       {word.word} 
                     </Table.Cell>
                     <Table.Cell>
-                      {word.occurrences}
+                      {word.occurrences.length}
                     </Table.Cell>
                   </Table.Row>
                 )

@@ -17,7 +17,7 @@ export default class Error extends Component {
         <Modal.Content>
           <h1>Oops.</h1>
           <h3>
-            Looks like we don't have anything about the movie.
+            Looks like we don't have anything about that movie.
             <br />
             What are you gonna do?
           </h3>
