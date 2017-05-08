@@ -60,9 +60,31 @@ input {
   width: 70vw;
 }
 
+a.ui.card:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .ui.card {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.ui.button {
+  background-color:#21BA45; 
+}
+
+.coverImage {
+  height: 250px;
+  float: left;
+  margin: 20px;
+}
+
+th {
+  color: black !important;
+}
+
+td {
+  color: black !important;
 }
 
 .example-enter {

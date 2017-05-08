@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header';
+import Overlay from './overlay';
 import Title from './title';
 import { inject, observer } from 'mobx-react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
@@ -13,10 +14,15 @@ export default inject('store')(observer(({store}) => (
       transitionLeaveTimeout={300}>
       {
         store.movieTitles.map(
-          title => <Title {...title} key={title.title} />
+          (title, index) => <Title 
+                      title={title.title}
+                      subs={title.subs}
+                      key={parseInt(index)}
+                      onClick={store.getInfo.bind(this, title.ref, title.title, title.subs)} />
         )
       }
     </CSSTransitionGroup>
+    <Overlay />
   </div>
 )));
 

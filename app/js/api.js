@@ -2,8 +2,9 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 import config from '../../config';
 
-const titles = query => fetch(config.API_ROOT + '/titles/' + query);
-const words = ref => fetch(config.API_ROOT + '/words/' + ref);
-const title = query => fetch(config.API_ROOT + '/title/' + query);
+const getTitles = query => fetch(config.API_ROOT + '/titles/' + query);
+const getWords = ref => fetch(config.API_ROOT + '/words/' + ref);
+const getTitle = query => fetch(config.API_ROOT + '/title/' + query);
+const getCover = uri => fetch(config.IMG_ROOT + uri)
 
-export { titles, title, words };
+export { getTitles, getTitle, getWords, getCover };
