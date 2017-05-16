@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { getTitles, getTitle, getWords, getCover } from '../api';
+import getTextFromHTMLString from '../util';
 import coverImage from '../../img/cover-image.png';
-import overlayState from './overlay';
 import moment from 'moment';
 
 class store {

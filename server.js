@@ -14,5 +14,5 @@ server.listen(process.env.PORT || 3000, 'localhost', function (err) {
   if (err) {
     console.log(err);
   }
-  console.log('Listening at localhost:' + (process.env.PORT || 3000));
+  console.log('Listening at http://localhost:' + (process.env.PORT || 3000));
 });
