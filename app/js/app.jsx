@@ -1,16 +1,17 @@
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'mobx-react';
 import React from 'react';
 import ReactDom from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import 'semantic-ui-css/semantic.min.css';
+// eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
 import style from 'scss/main.scss';
 import Root from './components';
-import { Provider } from 'mobx-react';
-import Store from './stores'
+import Store from './stores';
 
-const render = (Component, Store) => {
+const render = (Component, store) => {
   ReactDom.render(
     <AppContainer>
-      <Provider store={Store}>
+      <Provider store={store}>
         <Component />
       </Provider>
     </AppContainer>,

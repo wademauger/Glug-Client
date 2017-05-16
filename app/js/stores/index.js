@@ -1,8 +1,7 @@
 import { observable } from 'mobx';
-import { getTitles, getTitle, getWords, getCover } from '../api';
-import getTextFromHTMLString from '../util';
-import coverImage from '../../img/cover-image.png';
 import moment from 'moment';
+import { getTitles, getTitle, getWords } from '../api';
+import getTextFromHTMLString from '../util';
 
 class store {
 
@@ -12,7 +11,7 @@ class store {
   @observable errorShown = false;
   @observable spinnerShown = false;
 
-  /*information about the current movie*/
+  /* information about the current movie*/
   @observable title = '';
   @observable runtime = '0';
   @observable numSubs = 0;
@@ -31,28 +30,28 @@ class store {
     this.numSubs = numSubs;
 
     getWords(ref)
-      .then(results => {
-        if (results.status != 200){
+      .then((results) => {
+        if (results.status !== 200) {
           this.clearOverlays();
           this.errorShown = true;
-          throw "could not get words.";
+          throw new Error('could not get words.');
         }
         return results.json();
       })
-      .then(data => {
-        this.imdbid = data.imdbid; 
-        this.drinkWords.replace(data['ranked_words']);
-        return getTitle(data.imdbid)
+      .then((data) => {
+        this.imdbid = data.imdbid;
+        this.drinkWords.replace(data.ranked_words);
+        return getTitle(data.imdbid);
       })
       .then(results => results.json())
-      .then(data => {
+      .then((data) => {
         this.runtime = moment.duration(data.runtime, 'seconds').asMinutes();
         this.description = data.overview;
         this.coverImage = data.poster;
         this.overlayShown = true;
         this.spinnerShown = false;
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }
 
   requestTitles = (event) => {
@@ -60,15 +59,15 @@ class store {
     this.mostRecent = Date.now();
     const myTime = Date.now();
     getTitles(this.currentQuery)
-      .then(results => {
-        if (myTime > this.mostRecent){
-          throw "not more recent titles request";
+      .then((results) => {
+        if (myTime > this.mostRecent) {
+          throw new Error('not more recent titles request');
         }
         return results.json();
       })
       .then(data => this.movieTitles.replace(data))
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -85,6 +84,9 @@ class store {
     this.spinnerShown = false;
     this.overlayShown = false;
   }
+
+  getText = getTextFromHTMLString;
+
 }
 
 export default store;
