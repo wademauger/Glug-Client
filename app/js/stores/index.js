@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 import moment from 'moment';
 import { getTitles, getTitle, getWords } from '../api';
 import getTextFromHTMLString from '../util';
@@ -10,6 +10,11 @@ class store {
   @observable overlayShown = false;
   @observable errorShown = false;
   @observable spinnerShown = false;
+
+  @observable numPromises = 0;
+  @computed get loadingTitles() {
+    return this.numPromises > 0;
+  }
 
   /* information about the current movie*/
   @observable title = '';
@@ -57,9 +62,11 @@ class store {
   requestTitles = (event) => {
     this.currentQuery = event.target.value;
     this.mostRecent = Date.now();
+    this.numPromises += 1;
     const myTime = Date.now();
     getTitles(this.currentQuery)
       .then((results) => {
+        this.numPromises -= 1;
         if (myTime > this.mostRecent) {
           throw new Error('not more recent titles request');
         }
