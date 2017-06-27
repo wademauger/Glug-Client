@@ -1,7 +1,6 @@
 import { observable, computed } from 'mobx';
 import moment from 'moment';
 import { getTitles, getTitle, getWords } from '../api';
-import getTextFromHTMLString from '../util';
 
 class store {
 
@@ -91,8 +90,6 @@ class store {
     this.spinnerShown = false;
     this.overlayShown = false;
   }
-
-  getText = getTextFromHTMLString;
 
 }
 
